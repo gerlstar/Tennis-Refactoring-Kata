@@ -27,9 +27,8 @@ class TennisGame1 implements TennisGame
 
     public function wonPoint(string $playerName): void
     {
-        ($playerName === $this->player1Name) ? $this->m_score1++ 
-        : $this->m_score2++;
-        
+        ($playerName === $this->player1Name) ? $this->m_score1++
+            : $this->m_score2++;
     }
 
     private function tiedScore()
@@ -48,14 +47,14 @@ class TennisGame1 implements TennisGame
 
         $minusResult = $this->m_score1 - $this->m_score2;
 
-        $score = 'Win for '.$this->player2Name;
+        $score = 'Win for ' . $this->player2Name;
 
         if ($minusResult === 1) {
-            $score = 'Advantage '.$this->player1Name;
+            $score = 'Advantage ' . $this->player1Name;
         } elseif ($minusResult === -1) {
-            $score = 'Advantage '.$this->player2Name;
+            $score = 'Advantage ' . $this->player2Name;
         } elseif ($minusResult >= 2) {
-            $score = 'Win for '.$this->player1Name;
+            $score = 'Win for ' . $this->player1Name;
         }
 
 
@@ -68,13 +67,15 @@ class TennisGame1 implements TennisGame
         $score = '';
 
         if ($this->m_score1 === $this->m_score2) {
-           return $this->tiedScore();
+            //tie score   
+            return $this->tiedScore();
         } else if ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
+            //end-game score    
             return $this->setupAdvantageOrWin();
         } else {
+            //regular score
             $score .= $this->scoreLabels[$this->m_score1] . '-' . $this->scoreLabels[$this->m_score2];
             return $score;
         }
-        
     }
 }
