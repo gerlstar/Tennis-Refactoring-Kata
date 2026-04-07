@@ -16,7 +16,10 @@ class TennisGame1 implements TennisGame
     private string $playerTwoName = '';
 
     private array $scoreLabels = [
-      'Love', 'Fifteen', 'Thirty', 'Forty'
+        'Love',
+        'Fifteen',
+        'Thirty',
+        'Forty'
     ];
 
     private Player $playerOne;
@@ -49,38 +52,34 @@ class TennisGame1 implements TennisGame
         }
     }
 
-    private function tiedScore(){
-           var_dump('tied score');
-        // if ($this->m_score1 === $this->m_score2) {
+    private function tiedScore()
+    {
 
-            return match ($this->m_score1) {
-                0 => 'Love-All',
-                1 => 'Fifteen-All',
-                2 => 'Thirty-All',
-                default => 'Deuce',
-            };
-        // }
 
-        // return '';
-
+        return match ($this->m_score1) {
+            0 => 'Love-All',
+            1 => 'Fifteen-All',
+            2 => 'Thirty-All',
+            default => 'Deuce',
+        };
     }
 
-    private function setupAdvantageOrWin(){
+    private function setupAdvantageOrWin()
+    {
         $score = '';
 
-        // if ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
-            $minusResult = $this->m_score1 - $this->m_score2;
+        $minusResult = $this->m_score1 - $this->m_score2;
 
-            $score = 'Win for player2';
+        $score = 'Win for player2';
 
-            if ($minusResult === 1) {
-                $score = 'Advantage player1';
-            } elseif ($minusResult === -1) {
-                $score = 'Advantage player2';
-            } elseif ($minusResult >= 2) {
-                $score = 'Win for player1';
-            } 
-        // } 
+        if ($minusResult === 1) {
+            $score = 'Advantage player1';
+        } elseif ($minusResult === -1) {
+            $score = 'Advantage player2';
+        } elseif ($minusResult >= 2) {
+            $score = 'Win for player1';
+        }
+
 
         return $score;
     }
@@ -102,7 +101,7 @@ class TennisGame1 implements TennisGame
     //     //     };
 
     //     // } 
-        
+
     //     // if ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
     //     //     $minusResult = $this->m_score1 - $this->m_score2;
 
@@ -116,7 +115,7 @@ class TennisGame1 implements TennisGame
     //     //         $score = 'Win for player2';
     //     //     }
     //     // } 
-        
+
     //     else {
 
     //     // $tempScore = $this->m_score1;
@@ -136,7 +135,7 @@ class TennisGame1 implements TennisGame
     //             }
 
     //             $score .= $this->scoreLabels[$tempScore];
-              
+
     //         }
     //     }
     //     return $score;
@@ -146,28 +145,13 @@ class TennisGame1 implements TennisGame
     {
         $score = '';
 
-      
+
         if ($this->m_score1 === $this->m_score2) {
             $score = $this->tiedScore();
-        } 
-        else if ( $this->m_score1 >= 4 || $this->m_score2 >= 4) {
+        } else if ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
             $score = $this->setupAdvantageOrWin();
-            // var_dump('dfadfasdf');
-            // $minusResult = $this->m_score1 - $this->m_score2;
-            
-            // $score = 'Win for player2';
-
-            // if ($minusResult === 1) {
-            //     $score = 'Advantage player1';
-            // } elseif ($minusResult === -1) {
-            //     $score = 'Advantage player2';
-            // } elseif ($minusResult >= 2) {
-            //     $score = 'Win for player1';
-            // } 
-        } 
-        
-        else {
-            $score .= $this->scoreLabels[$this->m_score1] . '-' . $this->scoreLabels[$this->m_score2];       
+        } else {
+            $score .= $this->scoreLabels[$this->m_score1] . '-' . $this->scoreLabels[$this->m_score2];
         }
         return $score;
     }
