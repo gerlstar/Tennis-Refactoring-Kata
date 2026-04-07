@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use TennisGame\TennisGame1;
+use TennisGame\Player;
 
 /**
  * TennisGame1 test case.
@@ -17,6 +18,7 @@ class TennisGame1Test extends TestMaster
     protected function setUp(): void
     {
         parent::setUp();
+  
         $this->game = new TennisGame1('player1', 'player2');
     }
 
@@ -25,6 +27,7 @@ class TennisGame1Test extends TestMaster
      */
     public function testScores(int $score1, int $score2, string $expectedResult): void
     {
+
         $this->seedScores($score1, $score2);
         $this->assertSame($expectedResult, $this->game->getScore());
     }
