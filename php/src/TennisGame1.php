@@ -10,10 +10,8 @@ class TennisGame1 implements TennisGame
 
     private int $m_score2 = 0;
 
-    // private const PLAYER_ONE = 'player1';
-    // private const PLAYER_TWO = 'player2';
-    private string $playerOneName = '';
-    private string $playerTwoName = '';
+    // private string $playerOneName = '';
+    // private string $playerTwoName = '';
 
     private array $scoreLabels = [
         'Love',
@@ -22,40 +20,20 @@ class TennisGame1 implements TennisGame
         'Forty'
     ];
 
-    private Player $playerOne;
-    private Player $playerTwo;
-
-    // public function __construct(
-    //     private Player $player1,
-    //     private Player $player2
-    // ) {
-    //     $this->playerOne = $player1;
-    //     $this->playerTwo = $player2;
-    // }
-
     public function __construct(
         private string $player1Name,
         private string $player2Name
-    ) {
-        $this->playerOneName = $player1Name;
-        $this->playerTwoName = $player2Name;
-    }
+    ) {}
 
     public function wonPoint(string $playerName): void
     {
-        if ($playerName === $this->playerOneName) {
-            $this->m_score1++;
-            // $this->playerOne->setScore();
-        } else {
-            $this->m_score2++;
-            // $this->playerTwo->setScore();
-        }
+        ($playerName === $this->player1Name) ? $this->m_score1++ 
+        : $this->m_score2++;
+        
     }
 
     private function tiedScore()
     {
-
-
         return match ($this->m_score1) {
             0 => 'Love-All',
             1 => 'Fifteen-All',
@@ -70,89 +48,33 @@ class TennisGame1 implements TennisGame
 
         $minusResult = $this->m_score1 - $this->m_score2;
 
-        $score = 'Win for player2';
+        $score = 'Win for '.$this->player2Name;
 
         if ($minusResult === 1) {
-            $score = 'Advantage player1';
+            $score = 'Advantage '.$this->player1Name;
         } elseif ($minusResult === -1) {
-            $score = 'Advantage player2';
+            $score = 'Advantage '.$this->player2Name;
         } elseif ($minusResult >= 2) {
-            $score = 'Win for player1';
+            $score = 'Win for '.$this->player1Name;
         }
 
 
         return $score;
     }
-    // do not edit the name
-    // public function getScore2(): string
-    // {
-    //     $score = '';
 
-    //     $score = $this->tiedScore();
-
-    //     $score = $this->setupAdvantageOrWin();
-    //     // if ($this->m_score1 === $this->m_score2) {
-
-    //     //     $score = match ($this->m_score1) {
-    //     //         0 => 'Love-All',
-    //     //         1 => 'Fifteen-All',
-    //     //         2 => 'Thirty-All',
-    //     //         default => 'Deuce',
-    //     //     };
-
-    //     // } 
-
-    //     // if ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
-    //     //     $minusResult = $this->m_score1 - $this->m_score2;
-
-    //     //     if ($minusResult === 1) {
-    //     //         $score = 'Advantage player1';
-    //     //     } elseif ($minusResult === -1) {
-    //     //         $score = 'Advantage player2';
-    //     //     } elseif ($minusResult >= 2) {
-    //     //         $score = 'Win for player1';
-    //     //     } else {
-    //     //         $score = 'Win for player2';
-    //     //     }
-    //     // } 
-
-    //     else {
-
-    //     // $tempScore = $this->m_score1;
-
-    //      $score .= '-';
-    //     $tempScore = $this->m_score2;
-    //       $score .= $this->scoreLabels[$this->m_score2];
-
-    //       $score .= $this->scoreLabels[$this->m_score1];
-
-    //         for ($i = 1; $i < 3; $i++) {
-    //             if ($i === 1) {
-    //                 $tempScore = $this->m_score1;
-    //             } else {
-    //                 $score .= '-';
-    //                 $tempScore = $this->m_score2;
-    //             }
-
-    //             $score .= $this->scoreLabels[$tempScore];
-
-    //         }
-    //     }
-    //     return $score;
-    // }
-
+    // do not edit the function name
     public function getScore(): string
     {
         $score = '';
 
-
         if ($this->m_score1 === $this->m_score2) {
-            $score = $this->tiedScore();
+           return $this->tiedScore();
         } else if ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
-            $score = $this->setupAdvantageOrWin();
+            return $this->setupAdvantageOrWin();
         } else {
             $score .= $this->scoreLabels[$this->m_score1] . '-' . $this->scoreLabels[$this->m_score2];
+            return $score;
         }
-        return $score;
+        
     }
 }
